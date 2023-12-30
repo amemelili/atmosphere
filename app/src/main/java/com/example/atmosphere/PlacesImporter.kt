@@ -18,8 +18,8 @@ class PlacesImporter(var context: Context) {
         return json
     }
 
-    fun parseJSON(): Places {
-        return Gson().fromJson<Places>(readJSONFromAsset(), Places::class.java)
+    fun parseJSON(): Array<Place> {
+        return Gson().fromJson(readJSONFromAsset(), Array<Place>::class.java)
     }
 
 }

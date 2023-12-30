@@ -11,12 +11,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ApiCall().fetchData(this) { userData ->
+        /*ApiCall().fetchData(this) { userData ->
             displayResponse(userData.data.first_name)
-        }
+        }*/
 
         var places = PlacesImporter(this).parseJSON()
-        displayResponse(places.toString())
+        displayResponse(places.get(0).toString())
     }
 
     fun displayResponse(response : String) {
