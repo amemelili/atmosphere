@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         ApiCall().fetchData(this) { userData ->
             displayResponse(userData.data.first_name)
         }
+
+        var places = PlacesImporter(this).parseJSON()
+        displayResponse(places.toString())
     }
 
     fun displayResponse(response : String) {
