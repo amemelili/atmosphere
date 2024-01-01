@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import java.io.IOException
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         var places = PlacesImporter(this).parseJSON()
-        //displayResponse(places.get(0).toString())
+        displayPlaces(places)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
     fun displayResponse(response : String) {
         val text = findViewById<TextView>(R.id.textView)
         text.text = response
+    }
+
+    fun displayPlaces(places : Array<Place>) {
+        val placesRecycler = findViewById<RecyclerView>(R.id.recycler_view)
+        placesRecycler.adapter = ItemAdapter(this, places)
     }
 
     fun getLastKnownLocation() {
