@@ -5,6 +5,9 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +27,21 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         var places = PlacesImporter(this).parseJSON()
-        displayPlaces(places)
+
+        val placeInput = findViewById<EditText>(R.id.editPlace)
+        placeInput.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                displayPlaces(places)
+            }
+        })
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastKnownLocation()
@@ -37,7 +54,26 @@ class MainActivity : AppCompatActivity() {
 
     fun displayPlaces(places : Array<Place>) {
         val placesRecycler = findViewById<RecyclerView>(R.id.recycler_view)
-        placesRecycler.adapter = ItemAdapter(this, places)
+        val placeInput = findViewById<EditText>(R.id.editPlace)
+
+        if (placeInput.text.toString().length < 1) {
+            placesRecycler.adapter = ItemAdapter(this, emptyArray())
+            return
+        }
+
+        placesRecycler.adapter = ItemAdapter(this, filteredPlaces(placeInput.text.toString(), places))
+    }
+
+    fun filteredPlaces(name : String, places : Array<Place>) : Array<Place> {
+        var filteredArrayOfPlaces : Array<Place> = emptyArray<Place>()
+
+        for (place in places) {
+            if (place.name.contains(name, true)) {
+                filteredArrayOfPlaces = filteredArrayOfPlaces.plus(place)
+            }
+        }
+
+        return filteredArrayOfPlaces
     }
 
     fun getLastKnownLocation() {
@@ -52,9 +88,9 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 if (location != null) {
-                    displayResponse(location.latitude.toString())
+                    displayResponse(location.latitude.toString() + " " + location.longitude.toString())
                 } else {
-                    displayResponse("fdp")
+                    displayResponse("erreur dans le chargement de la position")
                 }
             }
         }
