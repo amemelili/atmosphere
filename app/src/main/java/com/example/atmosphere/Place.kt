@@ -5,4 +5,8 @@ data class Place(
     var department: String,
     var latitude: Float,
     var longitude: Float
-):java.io.Serializable
+):java.io.Serializable {
+    override fun toString(): String {
+        return this.name + " (" + this.department + ")"
+    }
+}
