@@ -16,35 +16,35 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var fusedLocationClient : FusedLocationProviderClient
+    public var latitude : Double = 0.0
+    public var longitude : Double = 0.0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var weatherContext : UserData
+
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        /*ApiCall().fetchData(this) { userData ->
-            displayResponse(userData.data.first_name)
-        }*/
 
         var places = PlacesImporter(this).parseJSON()
 
         val placeInput = findViewById<EditText>(R.id.editPlace)
         placeInput.addTextChangedListener(object : TextWatcher {
 
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s : Editable) {}
 
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
+            override fun beforeTextChanged(s : CharSequence, start : Int,
+                                           count : Int, after : Int) {
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
+            override fun onTextChanged(s : CharSequence, start : Int,
+                                       before : Int, count : Int) {
                 displayPlaces(places)
             }
         })
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        getLastKnownLocation()
+        getLocation()
     }
 
     fun displayResponse(response : String) {
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         return filteredArrayOfPlaces
     }
 
-    fun getLastKnownLocation() {
+    fun getLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -88,11 +88,24 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 if (location != null) {
-                    displayResponse(location.latitude.toString() + " " + location.longitude.toString())
+                    setLocation(location.latitude, location.longitude)
+                    getDailyForecast()
                 } else {
-                    displayResponse("erreur dans le chargement de la position")
+                    // display error
                 }
             }
+        }
+    }
+
+    fun setLocation(latitude : Double, longitude : Double) {
+        this.latitude = latitude
+        this.longitude = longitude
+    }
+
+    fun getDailyForecast() {
+        ApiCall().fetchData(this) { userData ->
+            displayResponse(userData.daily.time.get(0).toString())
+            weatherContext = userData
         }
     }
 }

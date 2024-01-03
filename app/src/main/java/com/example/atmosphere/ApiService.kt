@@ -5,6 +5,7 @@ import retrofit.Call
 import retrofit.http.GET
 
 interface ApiService {
-    @GET("api/users/2")
-    fun fetchData(): Call<UserData>
+
+    @GET(" ")
+    fun fetchData() : Call<UserData>
 }
