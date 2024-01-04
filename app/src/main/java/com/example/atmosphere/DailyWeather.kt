@@ -1,6 +1,6 @@
 package com.example.atmosphere
 
-data class UserData(
+data class DailyWeather(
     var latitude : Float,
     var longitude : Float,
     var generationtime_ms : Float,

@@ -1,6 +1,7 @@
 package com.example.atmosphere
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     public var latitude : Double = 0.0
     public var longitude : Double = 0.0
 
-    private lateinit var weatherContext : UserData
+    private lateinit var dailyWeather : DailyWeather
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,12 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
+
+        val searchIcon = findViewById<ImageView>(R.id.searchIcon)
+        searchIcon.setOnClickListener {
+            var intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun displayResponse(response : String) {
@@ -103,9 +111,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getDailyForecast() {
-        ApiCall().fetchData(this) { userData ->
-            displayResponse(userData.daily.time.get(0).toString())
-            weatherContext = userData
+        ApiCall().fetchData(this) { dailyWeather ->
+            displayResponse(dailyWeather.daily.time.get(0).toString())
+            this.dailyWeather = dailyWeather
         }
     }
 }
