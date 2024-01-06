@@ -10,8 +10,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import java.io.IOException
@@ -24,6 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var dailyWeather : DailyWeather
 
+    private lateinit var drawerLayout : DrawerLayout
+    private lateinit var menuIcon : ImageView
+
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,10 +37,17 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
 
-        val searchIcon = findViewById<ImageView>(R.id.searchIcon)
+        val searchIcon = findViewById<LinearLayout>(R.id.search)
         searchIcon.setOnClickListener {
-            var intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
+            openSearchActivity()
+            closeDrawer(drawerLayout)
+        }
+
+        drawerLayout = findViewById(R.id.drawerLayout)
+        menuIcon = findViewById<ImageView>(R.id.menu)
+
+        menuIcon.setOnClickListener {
+            openDrawer(drawerLayout)
         }
     }
 
@@ -71,8 +84,23 @@ class MainActivity : AppCompatActivity() {
 
     fun getDailyForecast() {
         ApiCall().fetchData(this) { dailyWeather ->
-            displayResponse(dailyWeather.daily.time.get(0).toString())
+            displayResponse(WeatherStatus.getStatusByWeatherCode(dailyWeather.daily.weather_code.get(0)))
             this.dailyWeather = dailyWeather
         }
+    }
+
+    fun openDrawer(drawerLayout : DrawerLayout) {
+        drawerLayout.openDrawer(GravityCompat.START)
+    }
+
+    fun closeDrawer(drawerLayout : DrawerLayout) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+    }
+
+    fun openSearchActivity() {
+        var intent = Intent(this, SearchActivity::class.java)
+        startActivity(intent)
     }
 }
