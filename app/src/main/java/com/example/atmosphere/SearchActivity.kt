@@ -8,11 +8,16 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchActivity : AppCompatActivity() {
+    public var currentLatitude : Float = 0.0F
+    public var currentLongitude : Float = 0.0F
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
         var places = PlacesImporter(this).parseJSON()
+
+        displayPlaces(places)
 
         val placeInput = findViewById<EditText>(R.id.editPlace)
         placeInput.addTextChangedListener(object : TextWatcher {
@@ -35,7 +40,7 @@ class SearchActivity : AppCompatActivity() {
         val placeInput = findViewById<EditText>(R.id.editPlace)
 
         if (placeInput.text.toString().length < 1) {
-            placesRecycler.adapter = ItemAdapter(this, emptyArray())
+            placesRecycler.adapter = ItemAdapter(this, predefinedArrayOfPlaces())
             return
         }
 
@@ -46,11 +51,19 @@ class SearchActivity : AppCompatActivity() {
         var filteredArrayOfPlaces : Array<Place> = emptyArray<Place>()
 
         for (place in places) {
-            if (place.name.contains(name, true)) {
+            if (place.name.startsWith(name, true)) {
                 filteredArrayOfPlaces = filteredArrayOfPlaces.plus(place)
             }
         }
 
-        return filteredArrayOfPlaces
+        return predefinedArrayOfPlaces() + filteredArrayOfPlaces.sortedBy { it.name?.toString() }
+    }
+
+    fun predefinedArrayOfPlaces() : Array<Place> {
+        return arrayOf(Place("Votre position", "", currentLatitude, currentLongitude))
+    }
+
+    fun closeSearch() {
+        finish()
     }
 }

@@ -7,25 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-/**
- * Adapter for the [RecyclerView] in [MainActivity]. Displays [Affirmation] data object.
- */
 class ItemAdapter(
-    private val context: Context,
-    private val dataset: Array<Place>
+    private val context : SearchActivity,
+    private val places : Array<Place>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder.
-    // Each data item is just an Affirmation object.
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
     }
 
-    /**
-     * Create new views (invoked by the layout manager)
-     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
@@ -34,16 +24,15 @@ class ItemAdapter(
         return ItemViewHolder(adapterLayout)
     }
 
-    /**
-     * Replace the contents of a view (invoked by the layout manager)
-     */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset.get(position)
-        holder.textView.text = item.toString()
+        val place = places.get(position)
+        holder.textView.text = place.toString()
+
+        holder.textView.setOnClickListener {
+            WeatherContext.settLocation(place)
+            context.closeSearch()
+        }
     }
 
-    /**
-     * Return the size of your dataset (invoked by the layout manager)
-     */
-    override fun getItemCount() = dataset.size
+    override fun getItemCount() = places.size
 }

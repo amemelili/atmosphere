@@ -6,8 +6,10 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telecom.Call
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent.Callback
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        WeatherContext.setLocationCallback = { changeLocation() }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
@@ -68,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 if (location != null) {
-                    setLocation(location.latitude, location.longitude)
+                    setInitLocation(location.latitude, location.longitude)
                     getDailyForecast()
                 } else {
                     // display error
@@ -77,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setLocation(latitude : Double, longitude : Double) {
+    fun setInitLocation(latitude : Double, longitude : Double) {
         this.latitude = latitude
         this.longitude = longitude
     }
@@ -102,5 +106,10 @@ class MainActivity : AppCompatActivity() {
     fun openSearchActivity() {
         var intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
+    }
+
+    fun changeLocation() {
+        val text = findViewById<TextView>(R.id.location)
+        text.text = WeatherContext.location.name
     }
 }

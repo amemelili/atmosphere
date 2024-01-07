@@ -7,6 +7,10 @@ data class Place(
     var longitude: Float
 ):java.io.Serializable {
     override fun toString(): String {
-        return this.name + " (" + this.department + ")"
+        if (department != "") {
+            return this.name + " (" + this.department + ")"
+        } else {
+            return this.name
+        }
     }
 }
