@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        WeatherContext.setLocationCallback = { changeLocation() }
+        WeatherContext.updateLocationCallback = { updateLocation() }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun changeLocation() {
+    fun updateLocation() {
         val text = findViewById<TextView>(R.id.location)
         text.text = WeatherContext.location.name
     }

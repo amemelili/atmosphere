@@ -2,10 +2,10 @@ package com.example.atmosphere
 
 object WeatherContext {
     public lateinit var location : Place
-    public var setLocationCallback = {}
+    public var updateLocationCallback = {}
 
-    fun settLocation(location : Place) {
+    fun updateLocation(location : Place) {
         this.location = location
-        this.setLocationCallback()
+        this.updateLocationCallback()
     }
 }

@@ -29,7 +29,7 @@ class ItemAdapter(
         holder.textView.text = place.toString()
 
         holder.textView.setOnClickListener {
-            WeatherContext.settLocation(place)
+            WeatherContext.updateLocation(place)
             context.closeSearch()
         }
     }
