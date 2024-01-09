@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var menuIcon : ImageView
 
+    private lateinit var refreshIcon : LinearLayout
+    private lateinit var searchIcon : LinearLayout
+
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,7 +44,13 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLocation()
 
-        val searchIcon = findViewById<LinearLayout>(R.id.search)
+        refreshIcon = findViewById<LinearLayout>(R.id.refresh)
+        refreshIcon.setOnClickListener {
+            refresh()
+            closeDrawer(drawerLayout)
+        }
+
+        searchIcon = findViewById<LinearLayout>(R.id.search)
         searchIcon.setOnClickListener {
             openSearchActivity()
             closeDrawer(drawerLayout)
@@ -84,6 +93,12 @@ class MainActivity : AppCompatActivity() {
     fun setInitLocation(latitude : Double, longitude : Double) {
         this.latitude = latitude
         this.longitude = longitude
+    }
+
+    fun refresh() {
+        displayResponse("")
+        //getHourlyForecast()
+        getDailyForecast()
     }
 
     fun getDailyForecast() {
