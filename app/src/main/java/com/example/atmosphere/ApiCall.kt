@@ -9,7 +9,7 @@ import retrofit.*
 class ApiCall {
     fun fetchData(context : Context, callback : (DailyWeather) -> Unit) {
 
-        val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.open-meteo.com/v1/forecast?latitude=" + MainActivity().latitude + "&longitude=" + MainActivity().longitude + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin").addConverterFactory(
+        val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.open-meteo.com/v1/forecast?latitude=" + WeatherContext.location.latitude + "&longitude=" + WeatherContext.location.longitude + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin").addConverterFactory(
             GsonConverterFactory.create()).build()
 
         val service : ApiService = retrofit.create<ApiService>(ApiService::class.java)

@@ -24,8 +24,6 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient : FusedLocationProviderClient
-    public var latitude : Double = 0.0
-    public var longitude : Double = 0.0
 
     private lateinit var dailyWeather : DailyWeather
 
@@ -81,18 +79,14 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 if (location != null) {
-                    setInitLocation(location.latitude, location.longitude)
-                    getDailyForecast()
+                    WeatherContext.initLocation = location
+                    WeatherContext.updateLocation(Place("Votre position", "", location.latitude, location.longitude))
+                //refresh()
                 } else {
                     // display error
                 }
             }
         }
-    }
-
-    fun setInitLocation(latitude : Double, longitude : Double) {
-        this.latitude = latitude
-        this.longitude = longitude
     }
 
     fun refresh() {
@@ -103,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getDailyForecast() {
         ApiCall().fetchData(this) { dailyWeather ->
-            displayResponse(WeatherStatus.getStatusByWeatherCode(dailyWeather.daily.weather_code.get(0)))
+            displayResponse(dailyWeather.toString())
             this.dailyWeather = dailyWeather
         }
     }
@@ -126,5 +120,6 @@ class MainActivity : AppCompatActivity() {
     fun updateLocation() {
         val text = findViewById<TextView>(R.id.location)
         text.text = WeatherContext.location.name
+        refresh()
     }
 }

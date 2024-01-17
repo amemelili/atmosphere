@@ -3,8 +3,8 @@ package com.example.atmosphere
 data class Place(
     var name: String,
     var department: String,
-    var latitude: Float,
-    var longitude: Float
+    var latitude: Double,
+    var longitude: Double
 ):java.io.Serializable {
     override fun toString(): String {
         if (department != "") {

@@ -8,8 +8,6 @@ import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchActivity : AppCompatActivity() {
-    public var currentLatitude : Float = 0.0F
-    public var currentLongitude : Float = 0.0F
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +58,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun predefinedArrayOfPlaces() : Array<Place> {
-        return arrayOf(Place("Votre position", "", currentLatitude, currentLongitude))
+        return arrayOf(Place("Votre position", "", WeatherContext.initLocation.latitude, WeatherContext.initLocation.longitude))
     }
 
     fun closeSearch() {
