@@ -28,3 +28,11 @@ data class Daily(
     var temperature_2m_min : Array<Float>,
     var precipitation_probability_max : Array<Int>
 ):java.io.Serializable
+
+data class DailyItem(
+    var time : String,
+    var weather_code : Int,
+    var temperature_2m_max : Float,
+    var temperature_2m_min : Float,
+    var precipitation_probability_max : Int,
+):java.io.Serializable

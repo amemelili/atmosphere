@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient : FusedLocationProviderClient
 
-    private lateinit var dailyWeather : DailyWeather
+    private var dailies : Array<DailyItem> = emptyArray<DailyItem>()
 
     private lateinit var drawerLayout : DrawerLayout
     private lateinit var menuIcon : ImageView
@@ -97,8 +97,18 @@ class MainActivity : AppCompatActivity() {
 
     fun getDailyForecast() {
         ApiCall().fetchData(this) { dailyWeather ->
-            displayResponse(dailyWeather.toString())
-            this.dailyWeather = dailyWeather
+            this.dailies = emptyArray()
+            for(i in 0..6) {
+                this.dailies = this.dailies.plus(
+                    DailyItem(dailyWeather.daily.time[i],
+                        dailyWeather.daily.weather_code[i],
+                        dailyWeather.daily.temperature_2m_max[i],
+                        dailyWeather.daily.temperature_2m_min[i],
+                        dailyWeather.daily.precipitation_probability_max[i]
+                    )
+                )
+            }
+            displayResponse(dailies[0].toString())
         }
     }
 
