@@ -50,7 +50,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dailyRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="52dp"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="48dp"
+            android:orientation="horizontal"
+            app:reverseLayout="true" />
 
     </LinearLayout>
 

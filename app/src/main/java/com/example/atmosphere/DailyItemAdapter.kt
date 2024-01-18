@@ -6,32 +6,26 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemAdapter(
-    private val context : SearchActivity,
-    private val places : Array<Place>
-) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class DailyItemAdapter(
+    private val dailyItems : Array<DailyItem>
+) : RecyclerView.Adapter<DailyItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.list_item)
+        val textView: TextView = view.findViewById(R.id.content)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // create a new view
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item, parent, false)
+            .inflate(R.layout.daily_item, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val place = places.get(position)
-        holder.textView.text = place.toString()
-
-        holder.textView.setOnClickListener {
-            WeatherContext.updateLocation(place)
-            context.closeSearch()
-        }
+        val dailyItem = dailyItems.get(position)
+        holder.textView.text = dailyItem.toString()
     }
 
-    override fun getItemCount() = places.size
+    override fun getItemCount() = dailyItems.size
 }

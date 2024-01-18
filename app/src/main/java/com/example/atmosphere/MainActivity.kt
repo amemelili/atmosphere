@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             }
-            displayResponse(dailies[0].toString())
+            val dailyItemsRecycler = findViewById<RecyclerView>(R.id.dailyRecycler)
+            dailyItemsRecycler.adapter = DailyItemAdapter(this.dailies)
         }
     }
 

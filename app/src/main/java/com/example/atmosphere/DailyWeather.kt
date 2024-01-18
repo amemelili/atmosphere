@@ -35,4 +35,8 @@ data class DailyItem(
     var temperature_2m_max : Float,
     var temperature_2m_min : Float,
     var precipitation_probability_max : Int,
-):java.io.Serializable
+):java.io.Serializable {
+    override fun toString(): String {
+        return time + " / " + WeatherStatus.getStatusByWeatherCode(weather_code) + " / " + temperature_2m_min + " / " + temperature_2m_max + " / " + precipitation_probability_max
+    }
+}
