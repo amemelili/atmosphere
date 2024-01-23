@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displayResponse(response : String) {
-        val text = findViewById<TextView>(R.id.textView)
+        val text = findViewById<TextView>(R.id.location)
         text.text = response
     }
 
@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun refresh() {
-        displayResponse("")
         //getHourlyForecast()
         getDailyForecast()
     }

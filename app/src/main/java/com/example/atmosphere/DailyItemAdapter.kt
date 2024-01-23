@@ -11,7 +11,10 @@ class DailyItemAdapter(
 ) : RecyclerView.Adapter<DailyItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.content)
+        val maxTemp: TextView = view.findViewById(R.id.temp_max)
+        val minTemp: TextView = view.findViewById(R.id.temp_min)
+        val precipitation: TextView = view.findViewById(R.id.precipitation)
+        val date: TextView = view.findViewById(R.id.date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -24,7 +27,15 @@ class DailyItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val dailyItem = dailyItems.get(position)
-        holder.textView.text = dailyItem.toString()
+        holder.maxTemp.text = dailyItem.temperature_2m_max.toString() + "°"
+        holder.minTemp.text = dailyItem.temperature_2m_min.toString() + "°"
+        holder.precipitation.text = dailyItem.precipitation_probability_max.toString() + "%"
+
+        var day = dailyItem.time[8].toString() + dailyItem.time[9].toString()
+        var month = dailyItem.time[5].toString() + dailyItem.time[6].toString()
+        var year = dailyItem.time[0].toString() + dailyItem.time[1].toString() + dailyItem.time[2].toString() + dailyItem.time[3].toString()
+
+        holder.date.text = day + "/" + month + "/" + year
     }
 
     override fun getItemCount() = dailyItems.size
