@@ -7,5 +7,7 @@ import retrofit.http.GET
 interface ApiService {
 
     @GET(" ")
-    fun fetchData() : Call<DailyWeather>
+    fun fetchDaily() : Call<DailyWeather>
+    @GET(" ")
+    fun fetchHourly() : Call<HourlyWeather>
 }

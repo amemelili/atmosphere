@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient : FusedLocationProviderClient
 
+    private var hourlies : Array<HourlyItem> = emptyArray<HourlyItem>()
     private var dailies : Array<DailyItem> = emptyArray<DailyItem>()
 
     private lateinit var drawerLayout : DrawerLayout
@@ -81,7 +82,6 @@ class MainActivity : AppCompatActivity() {
                 if (location != null) {
                     WeatherContext.initLocation = location
                     WeatherContext.updateLocation(Place("Votre position", "", location.latitude, location.longitude))
-                //refresh()
                 } else {
                     // display error
                 }
@@ -90,12 +90,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun refresh() {
-        //getHourlyForecast()
+        getHourlyForecast()
         getDailyForecast()
     }
 
+    fun getHourlyForecast() {
+        ApiCall().fetchHourly(this) { hourlyWeather ->
+            this.hourlies = emptyArray()
+            for(i in 0..23) {
+                this.hourlies = this.hourlies.plus(
+                    HourlyItem(hourlyWeather.hourly.time[i],
+                        hourlyWeather.hourly.temperature_2m[i],
+                        hourlyWeather.hourly.precipitation[i],
+                        hourlyWeather.hourly.weather_code[i]
+                    )
+                )
+            }
+            val hourlyItemsRecycler = findViewById<RecyclerView>(R.id.hourlyRecycler)
+            hourlyItemsRecycler.adapter = HourlyItemAdapter(this.hourlies)
+        }
+    }
+
     fun getDailyForecast() {
-        ApiCall().fetchData(this) { dailyWeather ->
+        ApiCall().fetchDaily(this) { dailyWeather ->
             this.dailies = emptyArray()
             for(i in 0..6) {
                 this.dailies = this.dailies.plus(

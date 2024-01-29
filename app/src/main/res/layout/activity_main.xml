@@ -33,9 +33,9 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dailyRecycler"
+            android:id="@+id/hourlyRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:orientation="horizontal"
             android:scrollbars="vertical"
@@ -43,6 +43,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:reverseLayout="false"
             tools:layout_editor_absoluteX="48dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dailyRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal"
+            android:scrollbars="vertical"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
+            app:reverseLayout="false"
+            tools:layout_editor_absoluteX="48dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

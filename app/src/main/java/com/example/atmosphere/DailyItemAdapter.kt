@@ -11,10 +11,10 @@ class DailyItemAdapter(
 ) : RecyclerView.Adapter<DailyItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val maxTemp: TextView = view.findViewById(R.id.temp_max)
+        val maxTemp: TextView = view.findViewById(R.id.temp)
         val minTemp: TextView = view.findViewById(R.id.temp_min)
         val precipitation: TextView = view.findViewById(R.id.precipitation)
-        val date: TextView = view.findViewById(R.id.date)
+        val date: TextView = view.findViewById(R.id.time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {

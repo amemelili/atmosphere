@@ -7,14 +7,40 @@ import android.widget.Toast
 import retrofit.*
 
 class ApiCall {
-    fun fetchData(context : Context, callback : (DailyWeather) -> Unit) {
+
+    fun fetchHourly(context : Context, callback : (HourlyWeather) -> Unit) {
+
+        val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.open-meteo.com/v1/forecast?latitude=" + WeatherContext.location.latitude + "&longitude=" + WeatherContext.location.longitude + "&hourly=temperature_2m,precipitation,weather_code&timezone=Europe%2FBerlin&forecast_days=1").addConverterFactory(
+            GsonConverterFactory.create()).build()
+
+        val service : ApiService = retrofit.create<ApiService>(ApiService::class.java)
+
+        val call : Call<HourlyWeather> = service.fetchHourly()
+
+        call.enqueue(object : Callback<HourlyWeather> {
+
+            override fun onResponse(response : Response<HourlyWeather>?, retrofit : Retrofit?) {
+
+                if(response!!.isSuccess){
+                    val hourlyWeather : HourlyWeather = response.body() as HourlyWeather
+                    callback(hourlyWeather)
+                }
+            }
+
+            override fun onFailure(t : Throwable?) {
+                Toast.makeText(context, "Request Fail", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun fetchDaily(context : Context, callback : (DailyWeather) -> Unit) {
 
         val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.open-meteo.com/v1/forecast?latitude=" + WeatherContext.location.latitude + "&longitude=" + WeatherContext.location.longitude + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FBerlin").addConverterFactory(
             GsonConverterFactory.create()).build()
 
         val service : ApiService = retrofit.create<ApiService>(ApiService::class.java)
 
-        val call : Call<DailyWeather> = service.fetchData()
+        val call : Call<DailyWeather> = service.fetchDaily()
 
         call.enqueue(object : Callback<DailyWeather> {
 
