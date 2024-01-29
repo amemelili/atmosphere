@@ -8,6 +8,31 @@ import retrofit.*
 
 class ApiCall {
 
+    fun fetchRealtime(context : Context, callback : (RealtimeWeather) -> Unit) {
+
+        val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.open-meteo.com/v1/forecast?latitude=" + WeatherContext.location.latitude + "&longitude=" + WeatherContext.location.longitude + "&current=temperature_2m,precipitation,weather_code&timezone=Europe%2FBerlin&forecast_days=1").addConverterFactory(
+            GsonConverterFactory.create()).build()
+
+        val service : ApiService = retrofit.create<ApiService>(ApiService::class.java)
+
+        val call : Call<RealtimeWeather> = service.fetchRealtime()
+
+        call.enqueue(object : Callback<RealtimeWeather> {
+
+            override fun onResponse(response : Response<RealtimeWeather>?, retrofit : Retrofit?) {
+
+                if(response!!.isSuccess){
+                    val realtimeWeather : RealtimeWeather = response.body() as RealtimeWeather
+                    callback(realtimeWeather)
+                }
+            }
+
+            override fun onFailure(t : Throwable?) {
+                Toast.makeText(context, "Request Fail", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     fun fetchHourly(context : Context, callback : (HourlyWeather) -> Unit) {
 
         val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.open-meteo.com/v1/forecast?latitude=" + WeatherContext.location.latitude + "&longitude=" + WeatherContext.location.longitude + "&hourly=temperature_2m,precipitation,weather_code&timezone=Europe%2FBerlin&forecast_days=1").addConverterFactory(

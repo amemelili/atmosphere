@@ -90,8 +90,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun refresh() {
+        getRealtimeForecast()
         getHourlyForecast()
         getDailyForecast()
+    }
+
+    fun getRealtimeForecast() {
+        var wmo : TextView = findViewById<TextView>(R.id.realtime_wmo)
+        var temp : TextView = findViewById<TextView>(R.id.realtime_temp)
+        var precipitation : TextView = findViewById<TextView>(R.id.realtime_precipitation)
+
+        wmo.text = ""
+        temp.text = ""
+        precipitation.text = ""
+
+        ApiCall().fetchRealtime(this) { realtimeWeather ->
+            wmo.text = WeatherStatus.getStatusByWeatherCode(realtimeWeather.current.weather_code)
+            temp.text = realtimeWeather.current.temperature_2m.toString() + "°"
+            precipitation.text = realtimeWeather.current.precipitation.toString() + "mm"
+        }
     }
 
     fun getHourlyForecast() {

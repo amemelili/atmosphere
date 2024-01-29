@@ -32,6 +32,27 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <TextView
+            android:id="@+id/realtime_wmo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ciel dégagé"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/realtime_temp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="-99.9°"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/realtime_precipitation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="100.0mm"
+            android:textSize="24sp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hourlyRecycler"
             android:layout_width="match_parent"
