@@ -9,12 +9,11 @@
     android:backgroundTint="#FFFFFF">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/weatherStatus"
         android:layout_width="104dp"
         android:layout_height="104dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="#C11B1B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +25,7 @@
         android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:src="@drawable/temperature"
+
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/precipitation"
         app:layout_constraintHorizontal_bias="0"
@@ -41,7 +41,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/weatherStatus">
 
         <TextView
             android:id="@+id/temp"
@@ -98,7 +98,7 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/weatherStatus"
         app:layout_constraintTop_toBottomOf="@+id/precipitation"
         app:layout_constraintVertical_bias="1.0" />
 

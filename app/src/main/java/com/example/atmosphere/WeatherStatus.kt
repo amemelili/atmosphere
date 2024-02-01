@@ -1,5 +1,7 @@
 package com.example.atmosphere
 
+import android.widget.ImageView
+
 object WeatherStatus {
 
     /*
@@ -36,43 +38,48 @@ object WeatherStatus {
         99 to "Orageux avec fortes chutes de grêle"
     )
 
+    private val weatherImageMap = mapOf(
+        0 to R.drawable.ic_sunny,
+        1 to R.drawable.ic_sunny,
+        2 to R.drawable.ic_partly_cloudy,
+        3 to R.drawable.ic_cloudy,
+        45 to R.drawable.ic_fog,
+        51 to R.drawable.ic_rain,
+        53 to R.drawable.ic_rain,
+        55 to R.drawable.ic_rain,
+        56 to R.drawable.ic_freezing_rain,
+        57 to R.drawable.ic_freezing_rain,
+        61 to R.drawable.ic_rain,
+        63 to R.drawable.ic_rain,
+        65 to R.drawable.ic_rain,
+        66 to R.drawable.ic_freezing_rain,
+        67 to R.drawable.ic_freezing_rain,
+        71 to R.drawable.ic_snow,
+        73 to R.drawable.ic_snow,
+        75 to R.drawable.ic_snow,
+        77 to R.drawable.ic_snow,
+        80 to R.drawable.ic_rain,
+        81 to R.drawable.ic_rain,
+        82 to R.drawable.ic_rain,
+        85 to R.drawable.ic_snow,
+        86 to R.drawable.ic_snow,
+        95 to R.drawable.ic_storm,
+        96 to R.drawable.ic_storm_rain,
+        99 to R.drawable.ic_storm_rain
+
+        )
+
+
     /*
     *   cette méthode retourne une chaîne de caractères sur l'état de la météo
     *   en fonction du code WMO (WMO Weather interpretation code) donné en paramètre
     */
-
-    private val weatherImageMap = mapOf(
-        "Ciel dégagé" to "res/drawable/ciel_degage.png",
-        "Principalement clair" to "res/drawable/ciel_degage.png",
-        "Partiellement nuageux" to "res/drawable/partiellement_nuageux.png",
-        "Ciel couvert" to "res/drawable/",
-        "Brumeux" to "res/drawable/",
-        "Légère bruine" to "res/drawable/",
-        "Bruine modérée" to "res/drawable/",
-        "Bruine dense" to "res/drawable/",
-        "Légère bruine verglaçante" to "res/drawable/",
-        "Forte bruine verglaçante" to "res/drawable/",
-        "Légèrement pluvieux" to "res/drawable/",
-        "Pluvieux" to "res/drawable/",
-        "Fortement pluvieux" to "res/drawable/",
-        "Légère pluie verglaçante" to "res/drawable/pluie_verglacante.png",
-        "Pluie verglaçante" to "res/drawable/pluie_verglacante.png",
-        "Légères chutes de neige" to "res/drawable/neige.png",
-        "Chutes de neige" to "res/drawable/neige.png",
-        "Fortes chutes de neige" to "res/drawable/neige.png",
-        "Chutes de neige en grains" to "res/drawable/",
-        "Légère averse" to "res/drawable/",
-        "Averse" to "res/drawable/",
-        "Forte averse" to "res/drawable/",
-        "Légère averse de neige" to "res/drawable/",
-        "Forte averse de neige" to "res/drawable/",
-        "Orageux" to "res/drawable/",
-        "Orageux avec chutes de grêle" to "res/drawable/",
-        "Orageux avec fortes chutes de grêle" to "res/drawable/",
-
-    )
-
     fun getStatusByWeatherCode(weatherCode : Int) : String {
         return weatherCodeMap.getValue(weatherCode)
     }
+
+    fun getImageStatusByWeatherCode(weatherCode : Int) : Int {
+        return weatherImageMap.getValue(weatherCode)
+    }
+
 }

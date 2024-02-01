@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import java.io.IOException
+import com.example.atmosphere.WeatherStatus
 
 class MainActivity : AppCompatActivity() {
 
@@ -99,15 +100,20 @@ class MainActivity : AppCompatActivity() {
         var wmo : TextView = findViewById<TextView>(R.id.realtime_wmo)
         var temp : TextView = findViewById<TextView>(R.id.realtime_temp)
         var precipitation : TextView = findViewById<TextView>(R.id.realtime_precipitation)
+        var weatherStatus : ImageView = findViewById<ImageView>(R.id.weatherStatus)
 
         wmo.text = ""
         temp.text = ""
         precipitation.text = ""
+        weatherStatus.setImageResource(0)
+
+
 
         ApiCall().fetchRealtime(this) { realtimeWeather ->
             wmo.text = WeatherStatus.getStatusByWeatherCode(realtimeWeather.current.weather_code)
             temp.text = realtimeWeather.current.temperature_2m.toString() + "°"
             precipitation.text = realtimeWeather.current.precipitation.toString() + "mm"
+            weatherStatus.setImageResource(WeatherStatus.getImageStatusByWeatherCode(realtimeWeather.current.weather_code))
         }
     }
 
