@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         var temp : TextView = findViewById<TextView>(R.id.realtime_temp)
         var precipitation : TextView = findViewById<TextView>(R.id.realtime_precipitation)
         var weatherStatus : ImageView = findViewById<ImageView>(R.id.weatherStatus)
+        var weatherBackground : ImageView = findViewById<ImageView>(R.id.weatherBackground)
 
         wmo.text = ""
         temp.text = ""
