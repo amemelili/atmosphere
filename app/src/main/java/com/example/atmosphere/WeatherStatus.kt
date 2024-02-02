@@ -69,6 +69,37 @@ object WeatherStatus {
 
         )
 
+    private val weatherBackgroungMap = mapOf(
+        0 to R.drawable.ic_sunny,
+        1 to R.drawable.ic_sunny,
+        2 to R.drawable.ic_partly_cloudy,
+        3 to R.drawable.ic_cloudy,
+        45 to R.drawable.ic_fog,
+        51 to R.drawable.ic_rain,
+        53 to R.drawable.ic_rain,
+        55 to R.drawable.ic_rain,
+        56 to R.drawable.ic_freezing_rain,
+        57 to R.drawable.ic_freezing_rain,
+        61 to R.drawable.ic_rain,
+        63 to R.drawable.ic_rain,
+        65 to R.drawable.ic_rain,
+        66 to R.drawable.ic_freezing_rain,
+        67 to R.drawable.ic_freezing_rain,
+        71 to R.drawable.ic_snow,
+        73 to R.drawable.ic_snow,
+        75 to R.drawable.ic_snow,
+        77 to R.drawable.ic_snow,
+        80 to R.drawable.ic_rain,
+        81 to R.drawable.ic_rain,
+        82 to R.drawable.ic_rain,
+        85 to R.drawable.ic_snow,
+        86 to R.drawable.ic_snow,
+        95 to R.drawable.ic_storm,
+        96 to R.drawable.ic_storm_rain,
+        99 to R.drawable.ic_storm_rain
+
+    )
+
 
     /*
     *   cette méthode retourne une chaîne de caractères sur l'état de la météo

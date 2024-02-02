@@ -106,8 +106,7 @@ class MainActivity : AppCompatActivity() {
         temp.text = ""
         precipitation.text = ""
         weatherStatus.setImageResource(0)
-
-
+        weatherBackground.setImageResource(0)
 
         ApiCall().fetchRealtime(this) { realtimeWeather ->
             wmo.text = WeatherStatus.getStatusByWeatherCode(realtimeWeather.current.weather_code)
