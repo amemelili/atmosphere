@@ -6,11 +6,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.telecom.Call
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.KeyEvent.Callback
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,9 +13,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
-import java.io.IOException
-import com.example.atmosphere.WeatherStatus
 
 class MainActivity : AppCompatActivity() {
 
@@ -100,20 +94,19 @@ class MainActivity : AppCompatActivity() {
         var wmo : TextView = findViewById<TextView>(R.id.realtime_wmo)
         var temp : TextView = findViewById<TextView>(R.id.realtime_temp)
         var precipitation : TextView = findViewById<TextView>(R.id.realtime_precipitation)
-        var weatherStatus : ImageView = findViewById<ImageView>(R.id.weatherStatus)
         var weatherBackground : ImageView = findViewById<ImageView>(R.id.weatherBackground)
 
         wmo.text = ""
         temp.text = ""
         precipitation.text = ""
-        weatherStatus.setImageResource(0)
-        weatherBackground.setImageResource(0)
+
 
         ApiCall().fetchRealtime(this) { realtimeWeather ->
             wmo.text = WeatherStatus.getStatusByWeatherCode(realtimeWeather.current.weather_code)
             temp.text = realtimeWeather.current.temperature_2m.toString() + "°"
             precipitation.text = realtimeWeather.current.precipitation.toString() + "mm"
-            weatherStatus.setImageResource(WeatherStatus.getImageStatusByWeatherCode(realtimeWeather.current.weather_code))
+            Glide.with(this).load(WeatherStatus.getGifStatusByWeatherCode(realtimeWeather.current.weather_code)).into(weatherBackground)
+
         }
     }
 

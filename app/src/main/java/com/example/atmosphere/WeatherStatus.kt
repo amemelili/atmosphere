@@ -100,6 +100,36 @@ object WeatherStatus {
 
     )
 
+    private val weatherGifMap = mapOf(
+        0 to R.drawable.gif_sun,
+        1 to R.drawable.gif_sun,
+        2 to R.drawable.gif_partly_cloudy,
+        3 to R.drawable.gif_cloudy,
+        45 to R.drawable.gif_fog,
+        51 to R.drawable.gif_rain,
+        53 to R.drawable.gif_rain,
+        55 to R.drawable.gif_rain,
+        56 to R.drawable.gif_rain,
+        57 to R.drawable.gif_rain,
+        61 to R.drawable.gif_rain,
+        63 to R.drawable.gif_rain,
+        65 to R.drawable.gif_rain,
+        66 to R.drawable.gif_rain,
+        67 to R.drawable.gif_rain,
+        71 to R.drawable.gif_snow,
+        73 to R.drawable.gif_snow,
+        75 to R.drawable.gif_snow,
+        77 to R.drawable.gif_snow,
+        80 to R.drawable.gif_rain,
+        81 to R.drawable.gif_rain,
+        82 to R.drawable.gif_rain,
+        85 to R.drawable.gif_snow,
+        86 to R.drawable.gif_snow,
+        95 to R.drawable.gif_storm,
+        96 to R.drawable.gif_rain_storm,
+        99 to R.drawable.gif_rain_storm
+
+    )
 
     /*
     *   cette méthode retourne une chaîne de caractères sur l'état de la météo
@@ -112,5 +142,10 @@ object WeatherStatus {
     fun getImageStatusByWeatherCode(weatherCode : Int) : Int {
         return weatherImageMap.getValue(weatherCode)
     }
+
+    fun getGifStatusByWeatherCode(weatherCode : Int) : Int {
+        return weatherGifMap.getValue(weatherCode)
+    }
+
 
 }
