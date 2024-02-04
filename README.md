@@ -127,7 +127,7 @@ Anthéa CYRIL
 Après avoir lancé notre application sur l’émulateur, il s’avère que
 cette dernière ne s’affiche pas correctement :
 
-<img src="/media/image5.jpg" style="width:1.55208in;height:2.53401in" />
+<img src="/media/image5.png style="width:1.55208in;height:2.53401in" />
 
 Il est donc conseillé d’utiliser l’application sur un Android physique
 directement.
