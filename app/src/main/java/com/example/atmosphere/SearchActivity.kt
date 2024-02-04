@@ -18,6 +18,9 @@ class SearchActivity : AppCompatActivity() {
         displayPlaces(places)
 
         val placeInput = findViewById<EditText>(R.id.editPlace)
+        val hint = "Recherche ville"
+        placeInput.hint = hint
+
         placeInput.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s : Editable) {}
@@ -28,6 +31,11 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(s : CharSequence, start : Int,
                                        before : Int, count : Int) {
+                if (s.isEmpty()) {
+                    placeInput.hint = hint
+                } else {
+                    placeInput.hint = ""
+                }
                 displayPlaces(places)
             }
         })

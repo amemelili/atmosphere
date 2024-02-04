@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawerLayout)
         menuIcon = findViewById<ImageView>(R.id.menu)
 
+
         menuIcon.setOnClickListener {
             openDrawer(drawerLayout)
         }

@@ -68,8 +68,7 @@
                         android:text="Ciel dégagé"
                         android:textStyle="bold|normal"
                         android:textColor="@color/white"
-                        android:textSize="34sp"
-                        tools:ignore="NotSibling" />
+                        android:textSize="34sp"/>
 
                     <TextView
                         android:id="@+id/realtime_precipitation"
@@ -108,53 +107,65 @@
 
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/textView"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="15dp"
-            android:text="Prévisions du jour"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hourlyRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="8dp"
-            android:orientation="horizontal"
-            android:scrollbars="vertical"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
-            app:reverseLayout="false"
-            tools:layout_editor_absoluteX="48dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="15dp"
-            android:text="Prévisions de la semaine"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Prévisions du jour"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dailyRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            android:scrollbars="vertical"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
-            app:reverseLayout="false"
-            tools:layout_editor_absoluteX="48dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hourlyRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal"
+                    android:scrollbars="vertical"
+                    app:layoutManager="LinearLayoutManager"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:reverseLayout="false"
+                    tools:layout_editor_absoluteX="48dp" />
 
-        </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Prévisions de la semaine"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/dailyRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="8dp"
+                    android:orientation="horizontal"
+                    android:scrollbars="vertical"
+                    app:layoutManager="LinearLayoutManager"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:reverseLayout="false"
+                    tools:layout_editor_absoluteX="48dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 
