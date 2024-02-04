@@ -24,7 +24,7 @@ planifier en conséquence.
 
 **Captures d'écran**
 
-<img src="/media/image.jpg" style="width:1.48352in;height:3.21875in" /><img src="/media/image2.jpg" style="width:1.46911in;height:3.19792in" /><img src="/media/image3.jpg" style="width:1.48352in;height:3.21875in" /><img src="/media/image4.jpg" style="width:1.4649in;height:3.17836in" />
+<img src="/media/image.png" style="width:1.48352in;height:3.21875in" /><img src="/media/image2.png" style="width:1.46911in;height:3.19792in" /><img src="/media/image3.png" style="width:1.48352in;height:3.21875in" /><img src="/media/image4.png" style="width:1.4649in;height:3.17836in" />
 
 **Fonctionnalités**
 
