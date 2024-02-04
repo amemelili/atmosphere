@@ -24,7 +24,7 @@ planifier en conséquence.
 
 **Captures d'écran**
 
-<img src="/media/image.png" style="width:1.48352in;height:3.21875in" /><img src="/media/image2.png" style="width:1.46911in;height:3.19792in" /><img src="/media/image3.png" style="width:1.48352in;height:3.21875in" /><img src="/media/image4.png" style="width:1.4649in;height:3.17836in" />
+<img src="/media/image.jpg" style="width:1.48352in;height:3.21875in" /><img src="/media/image2.jpg" style="width:1.46911in;height:3.19792in" /><img src="/media/image3.jpg" style="width:1.48352in;height:3.21875in" /><img src="/media/image4.jpg" style="width:1.4649in;height:3.17836in" />
 
 **Fonctionnalités**
 
@@ -127,7 +127,7 @@ Anthéa CYRIL
 Après avoir lancé notre application sur l’émulateur, il s’avère que
 cette dernière ne s’affiche pas correctement :
 
-<img src="/media/image5.png" style="width:1.55208in;height:2.53401in" />
+<img src="/media/image5.jpg" style="width:1.55208in;height:2.53401in" />
 
 Il est donc conseillé d’utiliser l’application sur un Android physique
 directement.
